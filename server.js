@@ -13,7 +13,7 @@ app.use(express.json());
 
 // SERVE OS ARQUIVOS ESTÁTICOS DO FRONTEND (HTML, CSS, JS)
 // Isso diz para o Express servir tudo que está na pasta 'frontend'
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 // Função para ler todos os produtos do arquivo TXT
 async function readProducts() {
@@ -101,12 +101,9 @@ app.delete('/api/produtos/:codigo', async (req, res) => {
 
 // ✅ ROTA PARA SERVIR O ARQUIVO PRINCIPAL (opcional, mas ajuda)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, 'frontend','index.html'));
 });
 
 // Inicia o servidor
-app.listen(PORT, () => {
-  console.log(`🟢 Servidor rodando em: http://localhost:${PORT}`);
-  console.log(`📊 API está disponível em: http://localhost:${PORT}/api/produtos`);
-  console.log(`🌐 Frontend está disponível em: http://localhost:${PORT}`);
-});
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Servidor rodando na porta: ${port}`));
